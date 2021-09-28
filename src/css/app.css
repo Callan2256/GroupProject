@@ -1,0 +1,95 @@
+/* ---------------------
+------- Varibales ------ 
+------------------------ */
+
+:root {
+    --main-accent: #F0A54C;
+    --light-accent-color: #f1f1f5;
+    --dark-accent-color: #333;
+    --main-grey: #555;
+}
+
+
+/* ---------------------
+-------- Resets -------- 
+------------------------ */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: arial, helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* Globals */
+
+body {
+    background-color: var(--light-accent-color);
+}
+
+a {
+    text-decoration: none
+}
+
+a:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.header {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--main-grey);
+}
+
+.full-screen-opaque {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 5;
+}
+
+
+/* Nav Bar */
+
+#nav {
+    height: 60px;
+    background-color: var(--dark-accent-color);
+    margin-bottom: 25px;
+}
+
+#navContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-header {
+    color: var(--light-accent-color);
+    font-size: 28px;
+}
+
+#loginBtn {
+    font-size: 24px;
+    color: var(--light-accent-color);
+    transition: all 0.25s;
+}
+
+#loginBtn:hover {
+    transform: scale(1.05);
+}
