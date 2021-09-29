@@ -88,13 +88,23 @@ p {
     font-size: 28px;
 }
 
-#loginBtn {
-    font-size: 24px;
+#loginDiv {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginBtn,
+#signupBtn {
+    font-size: 18px;
+    padding: 5px;
     color: var(--light-accent-color);
     transition: all 0.25s;
 }
 
-#loginBtn:hover {
+#loginBtn:hover,
+#signupBtn:hover {
     transform: scale(1.05);
 }
 
