@@ -23,13 +23,22 @@
 
     <div id="loginContainer" class="full-screen-opaque hidden">
         <div class="panel" id="loginPanel">
-            <h3 class="header">Login</h3>
-            <form id="loginForm">
+            <h3 id="loginHeader" class="header hidden">Login</h3>
+            <h3 id="signupHeader" class="header hidden">Sign up</h3>
+            <form id="loginForm" class="hidden">
                 <input type="text" name="username" id="form-username" class="form-control" placeholder="Username">
                 <input type="password" name="password" id="form-password" class="form-control" placeholder="Password">
 
-                <input type="submit" id="submitButton" value="Login">
-                <input type="submit" id="cancelButton" value="Cancel">
+                <input type="submit" id="loginSubmitButton" value="Login">
+                <input type="submit" id="loginCancelButton" value="Cancel">
+            </form>
+
+            <form id="signupForm" class="hidden">
+                <input type="text" name="username" id="signup-username" class="form-control" placeholder="Username">
+                <input type="password" name="password" id="signup-password" class="form-control" placeholder="Password">
+
+                <input type="submit" id="signupSubmitButton" value="Sign Up">
+                <input type="submit" id="signupCancelButton" value="Cancel">
             </form>
         </div>
     </div>
