@@ -129,3 +129,24 @@ p {
 #loginContainer.hidden {
     display: none;
 }
+
+
+/* Buttons */
+
+input[type='submit'],
+button {
+    padding: 8px 22px;
+    border-radius: 5px;
+    border: 1px solid var(--main-accent);
+    background-color: var(--main-accent);
+    color: var(--light-accent-color);
+    font-size: 10px;
+    transition: all 0.25s;
+}
+
+input[type='submit']:hover,
+button:hover {
+    cursor: pointer;
+    color: var(--main-accent);
+    background: white;
+}
