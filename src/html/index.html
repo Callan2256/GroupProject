@@ -18,7 +18,21 @@
         </div>
     </nav>
 
-    <p>Coffee is 4 kool kidz</p>
+    <div id="loginContainer" class="full-screen-opaque hidden">
+        <div class="panel" id="loginPanel">
+            <h3 class="header">Login</h3>
+            <form id="loginForm">
+                <input type="text" name="username" id="form-username" class="form-control" placeholder="Username">
+                <input type="text" name="password" id="form-password" class="form-control" placeholder="Password">
+
+                <input type="submit" id="submitButton" value="Login">
+                <input type="submit" id="cancelButton" value="Cancel">
+            </form>
+        </div>
+    </div>
+
+    <!-- Load Scripts -->
+    <script src="../js/tempFunctions.js"></script>
 </body>
 
 </html>
