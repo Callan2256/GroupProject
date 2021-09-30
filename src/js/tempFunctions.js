@@ -1,12 +1,13 @@
 //This is a temporary javascript file before everything is rebuilt using MVC
 
-//Login
+//Login / Logout
 const loginPanel = document.getElementById('loginContainer');
 const loginBtn = document.getElementById('loginBtn');
 const loginForm = document.getElementById('loginForm');
 const loginSubmit = document.getElementById('loginSubmitButton');
 const loginCancel = document.getElementById('loginCancelButton');
 const loginHeader = document.getElementById('loginHeader');
+const logoutBtn = document.getElementById('logoutBtn');
 
 //Sign up
 const signupBtn = document.getElementById('signupBtn');
@@ -17,6 +18,7 @@ const signupHeader = document.getElementById('signupHeader');
 
 //Model
 const modelInst = model;
+model.add(new user(78638, "Callan", "Password"));
 
 /*
 Resets Panel
@@ -37,6 +39,11 @@ loginBtn.addEventListener('click', event => {
     loginPanel.classList.remove('hidden');
     loginForm.classList.remove('hidden');
     loginHeader.classList.remove('hidden');
+});
+
+
+logoutBtn.addEventListener('click', event => {
+    logout();
 });
 
 /*
@@ -127,6 +134,16 @@ function login(username, password) {
         displayLogin(user);
         hidePanel();
     }
+}
+
+function logout() {
+    let accountDisplay = document.getElementById("accountDiv");
+    let loginDiv = document.getElementById("loginDiv");
+    let nameSpan = document.getElementById("displayName");
+
+    loginDiv.classList.remove("hidden");
+    accountDisplay.classList.add("hidden");
+    nameSpan.innerText = '';
 }
 
 function displayLogin(user) {
