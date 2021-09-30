@@ -41,7 +41,6 @@ loginBtn.addEventListener('click', event => {
     loginHeader.classList.remove('hidden');
 });
 
-
 logoutBtn.addEventListener('click', event => {
     logout();
 });
@@ -64,7 +63,6 @@ loginSubmit.addEventListener('click', event => {
     console.log("Attempting Login")
     login(loginForm.username.value, loginForm.password.value);
 });
-
 
 /*
 Listens for submit button press on sign up panel and handles user input
@@ -133,9 +131,11 @@ function login(username, password) {
         console.log("Login Successful.")
         displayLogin(user);
         hidePanel();
+        clearFields();
     }
 }
 
+/* */
 function logout() {
     let accountDisplay = document.getElementById("accountDiv");
     let loginDiv = document.getElementById("loginDiv");
@@ -144,8 +144,12 @@ function logout() {
     loginDiv.classList.remove("hidden");
     accountDisplay.classList.add("hidden");
     nameSpan.innerText = '';
+    clearFields();
 }
 
+/*
+Displays the logged in users name 
+*/
 function displayLogin(user) {
     let accountDisplay = document.getElementById("accountDiv");
     let loginDiv = document.getElementById("loginDiv");
@@ -154,4 +158,16 @@ function displayLogin(user) {
     loginDiv.classList.add("hidden");
     accountDisplay.classList.remove("hidden");
     nameSpan.innerText = user.name;
+}
+
+/*
+Clearing the form fields for login / logout
+*/
+function clearFields() {
+    loginForm.username.value = '';
+    loginForm.password.value = '';
+
+    signupForm.username.value = '';
+    signupForm.password.value = '';
+    signupForm.confirmPassword.value = '';
 }
