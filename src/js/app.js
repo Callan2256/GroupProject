@@ -10,16 +10,15 @@ const bodyParser = require("body-parser"); // middleware
 
 //ROUTES
 
+const path = require("path");
+
 // Route to Homepage
 app.get("/", (req, res) => {
-  console.log("we are on the index");
-  //res.sendFile(__dirname + "/html/index.html");
-  res.send("index page");
+  res.sendFile(path.join(__dirname, "..", "html", "index.html"));
 });
 
 app.get("/login", (req, res) => {
-  console.log("we are on the login ");
-  res.send("login");
+  //res.sendFile(path.join(__dirname, "..", "html", "index.html"));
 });
 
 //create server
