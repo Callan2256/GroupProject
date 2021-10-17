@@ -2,8 +2,7 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
-const { MONGO_URI } = require("./config");
-const bodyParser = require("body-parser");
+require("dotenv").config();
 
 //create express app
 const app = express();
@@ -12,7 +11,7 @@ const path = require("path");
 
 //connect to database
 mongoose
-  .connect(MONGO_URI)
+  .connect(process.env.DB_CONNECTION)
   .then(() => {
     console.log("MongoDB connected");
   })
