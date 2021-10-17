@@ -9,7 +9,7 @@ const { allowedNodeEnvironmentFlags } = require("process");
 const app = express();
 
 app.use("/", (req, res) => {
-  res.send("we are noton home");
+  res.send("we are not on home");
 });
 //ROUTES
 
