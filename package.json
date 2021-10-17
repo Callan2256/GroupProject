@@ -1,0 +1,26 @@
+{
+  "name": "groupproject",
+  "version": "1.0.0",
+  "description": "NWEN304 Group Project",
+  "main": "src/html/index.html", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/js/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Callan2256/GroupProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Callan2256/GroupProject/issues"
+  },
+  "homepage": "https://github.com/Callan2256/GroupProject#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
