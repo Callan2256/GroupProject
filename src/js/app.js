@@ -24,7 +24,20 @@ mongoose
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "view", "html", "index.html"));
 });
-app.use(express.static(path.join(__dirname, "..", "view", "css")));
+
+app.use(express.static(path.join(__dirname, "..", "/public")));
+
+app.get("/model/user.js", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "model", "user.js"));
+});
+
+app.get("/model/products.js", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "model", "products.js"));
+});
+
+app.get("/controller/controller.js", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
+});
 
 //starting server
 app.listen(3000, console.log(`listening on port ${PORT}`));
