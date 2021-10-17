@@ -1,25 +1,31 @@
 //server code
 
-console.log("APP");
-const http = require("http");
-
 const express = require("express");
+const mongoose = require("mongoose");
+const { MONGO_URI } = require("./config");
+const bodyParser = require("body-parser");
+
+//create express app
 const app = express();
-
-const bodyParser = require("body-parser"); // middleware
-
-//ROUTES
-
+const PORT = 3000;
 const path = require("path");
 
-// Route to Homepage
+//connect to database
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+//ROUTES
+//Route to Homepage
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "html", "index.html"));
 });
+app.use(express.static(path.join(__dirname, "..", "css")));
 
-app.get("/login", (req, res) => {
-  //res.sendFile(path.join(__dirname, "..", "html", "index.html"));
-});
-
-//create server
-const server = http.createServer(app).listen(3000);
+//starting server
+app.listen(3000, console.log(`listening on port ${PORT}`));

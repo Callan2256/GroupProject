@@ -2,7 +2,7 @@
   "name": "groupproject",
   "version": "1.0.0",
   "description": "NWEN304 Group Project",
-  "main": "src/html/index.html",
+  "main": "src/js/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/js/app.js"
@@ -19,7 +19,8 @@
   "homepage": "https://github.com/Callan2256/GroupProject#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"
