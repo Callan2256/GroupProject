@@ -4,14 +4,12 @@ console.log("APP");
 const http = require("http");
 
 const express = require("express");
-const { allowedNodeEnvironmentFlags } = require("process");
-
 const app = express();
 
-app.use("/", (req, res) => {
-  res.send("we are not on home");
-});
 //ROUTES
+app.use("/", (req, res) => {
+  res.send("HELLO");
+});
 
 //create server
 const server = http.createServer(app).listen(3000);
