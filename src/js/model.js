@@ -1,12 +1,13 @@
-//Placeholder
+//Model - operations
 
 const model = {
-    users: [],
-    items: [],
-    add(user) {
-        this.users.push(user);
-    },
-    addItem(item) {
-        this.items.push(item);
-    }
-}
+  users: [],
+  items: [],
+
+  addUser(user) {
+    this.users.push(user);
+  },
+  addItem(item) {
+    this.items.push(item);
+  },
+};
