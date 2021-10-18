@@ -9,15 +9,11 @@ const PORT = 3000;
 const path = require("path");
 
 //bcrypt
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-
-//Temporary Users Array
-let users = [];
 
 //connect to database
 mongoose
@@ -30,10 +26,6 @@ mongoose
     });
 
 //ROUTES
-
-const productRoutes = require("../../routes/api/productsRoute");
-//create product
-app.use("/api/products", productRoutes);
 
 //Route to Homepage
 app.get("/", (req, res) => {
@@ -64,8 +56,9 @@ app.post('/create', async(req, res) => {
     let username = req.body.username;
     let id = req.body.id;
 
-    console.log("Username: " + username);
-    console.log("Password: " + pass);
+    //create product
+    const productRoutes = require("../../routes/api/productsRoute");
+    app.use("/api/products", productRoutes);
 
     let user = {
         "id": id,
@@ -74,7 +67,8 @@ app.post('/create', async(req, res) => {
         "admin": "false"
     }
 
-    users.push(user);
+    console.log("Username: " + username);
+    console.log("Password: " + pass);
 
     res.status(201).send();
 });
