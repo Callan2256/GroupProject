@@ -76,16 +76,20 @@ signupSubmit.addEventListener("click", (event) => {
         console.log("Passwords dont match.");
     } else {
         console.log("Creating user...");
-        makeUser(username, password, false);
-        hidePanel();
+        let id = (Math.random() * Date.now()).toString().substring(0, 7);
 
+        //POST Request
         let xhr = new XMLHttpRequest();
         xhr.open("POST", '/create', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
+            "id": id,
             "username": username,
             "password": password
         }));
+
+        clearFields();
+        hidePanel();
     }
 });
 
@@ -98,48 +102,34 @@ signupCancel.addEventListener("click", (event) => {
     event.preventDefault();
     hidePanel();
 });
-/* 
-Creates new user and adds to array
-*/
-function makeUser(name, password) {
-    //Generate Unique ID
-    let id = (Math.random() * Date.now()).toString().substring(0, 7);
-    //Create User
-    let tempUser = new user(id, name, password);
-    //Add user to list
-    model.addUser(tempUser);
-    console.log(tempUser);
-    console.log("User Created.");
-    clearFields();
-}
 
 function login(username, password) {
     let inputName = username;
     let inputPass = password;
 
-    let user = null;
+    let xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open("POST", "/login", FontFaceSetLoadEvent);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        "username": inputName,
+        "password": inputPass
+    }));
 
-    try {
-        user = modelInst.users.find((user) => user.name === inputName);
-    } catch (error) {
-        console.log(error);
-    }
+    xhr.onload = () => {
+        if (xhr.readyState === 4) {
 
-    if (user == null) {
-        console.log("User not found");
-        return;
-    }
-
-    if (user.password !== inputPass) {
-        console.log("Incorrect Password");
-        return;
-    }
-
-    if (user.password === inputPass && user.name === inputName) {
-        console.log("Login Successful.");
-        displayLogin(user);
-        hidePanel();
-        clearFields();
+            if (xhr.status == 200) {
+                let res = xhr.response;
+                console.log(res)
+                console.log("Login Successful.");
+                displayLogin(new user(res.id, res.username, "", res.admin));
+                hidePanel();
+                clearFields();
+            } else if (xhr.status == 400) {
+                console.log("Error Logging In, Please Check Username And Password");
+            }
+        }
     }
 }
 
@@ -179,9 +169,3 @@ function clearFields() {
     signupForm.password.value = "";
     signupForm.confirmPassword.value = "";
 }
-
-
-//Creating Dummy Users
-model.addUser(new user(87654321, "Callan", "Password", true));
-model.addUser(new user(12345678, "Ashley", "Password", true));
-model.addUser(new user(95386481, "Admin", "Admin", true));

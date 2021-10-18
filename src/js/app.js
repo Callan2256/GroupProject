@@ -62,18 +62,51 @@ app.get('/users', (req, res) => {
 app.post('/create', async(req, res) => {
     let pass = await encryptPass(req.body.password);
     let username = req.body.username;
+    let id = req.body.id;
 
     console.log("Username: " + username);
     console.log("Password: " + pass);
 
     let user = {
+        "id": id,
         "username": username,
-        "password": pass
+        "password": pass,
+        "admin": "false"
     }
 
     users.push(user);
 
     res.status(201).send();
+});
+
+app.post('/login', async(req, res) => {
+    let inputname = req.body.username;
+    let password = req.body.password;
+
+    console.log(users);
+    let user = users.find(user => user.username === inputname);
+
+    if (user === undefined) {
+        res.status(400).send(JSON.stringify({
+            "Result": "Unsuccessful"
+        }));
+        return;
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+        res.status(200).send(JSON.stringify({
+            "Result": "Success",
+            "id": user.id,
+            "username": user.username,
+            "admin": user.admin
+        }));
+        return;
+    } else {
+        res.status(400).send(JSON.stringify({
+            "Result": "Unsuccessful"
+        }));
+    }
 });
 
 //General Functions
@@ -91,6 +124,18 @@ async function encryptPass(password) {
 
     return hash;
 }
+
+async function adminUsers() {
+    try {
+        users.push({ "id": "12345678", "username": "Callan", "password": await encryptPass("Password"), "admin": "true" })
+        users.push({ "id": "87654321", "username": "Ashley", "password": await encryptPass("Password"), "admin": "true" })
+    } catch {
+        console.log("Error Adding Admin Users");
+    }
+}
+
+//Adding Admin Users
+adminUsers();
 
 //starting server
 app.listen(3000, console.log(`listening on port ${PORT}`));
