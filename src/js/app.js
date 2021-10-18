@@ -15,6 +15,10 @@ const saltRounds = 10;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+//Temporary Users Array
+let users = [];
+
 //connect to database
 mongoose
     .connect(process.env.DB_CONNECTION)
@@ -51,12 +55,23 @@ app.get("/controller/controller.js", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
 });
 
+app.get('/users', (req, res) => {
+    res.send(users);
+})
+
 app.post('/create', async(req, res) => {
     let pass = await encryptPass(req.body.password);
     let username = req.body.username;
 
     console.log("Username: " + username);
     console.log("Password: " + pass);
+
+    let user = {
+        "username": username,
+        "password": pass
+    }
+
+    users.push(user);
 
     res.status(201).send();
 });
