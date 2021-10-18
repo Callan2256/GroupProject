@@ -78,6 +78,14 @@ signupSubmit.addEventListener("click", (event) => {
         console.log("Creating user...");
         makeUser(username, password, false);
         hidePanel();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", '/create', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            "username": username,
+            "password": password
+        }));
     }
 });
 
@@ -102,6 +110,7 @@ function makeUser(name, password) {
     model.addUser(tempUser);
     console.log(tempUser);
     console.log("User Created.");
+    clearFields();
 }
 
 function login(username, password) {
