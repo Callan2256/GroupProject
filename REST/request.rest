@@ -1,0 +1,13 @@
+GET http://localhost:3000/controller/controller.js
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json 
+
+{
+    "id": "5729389"
+    "password": "password"
+    "name": "Test"
+    "admin": "false"
+}

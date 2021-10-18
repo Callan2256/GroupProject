@@ -1,5 +1,4 @@
 //server code
-
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -33,6 +32,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "view", "html", "index.html"));
 });
 
+//Static path for CSS
 app.use(express.static(path.join(__dirname, "..", "/public")));
 
 app.get("/model/user.js", (req, res) => {

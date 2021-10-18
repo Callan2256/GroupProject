@@ -16,7 +16,8 @@ const signupHeader = document.getElementById("signupHeader");
 
 //Model
 const modelInst = model;
-model.addUser(new user(78638, "Callan", "Password"));
+
+//Encryption
 
 /*
 Resets Panel
@@ -75,7 +76,7 @@ signupSubmit.addEventListener("click", (event) => {
         console.log("Passwords dont match.");
     } else {
         console.log("Creating user...");
-        makeUser(username, password);
+        makeUser(username, password, false);
         hidePanel();
     }
 });
@@ -169,3 +170,9 @@ function clearFields() {
     signupForm.password.value = "";
     signupForm.confirmPassword.value = "";
 }
+
+
+//Creating Dummy Users
+model.addUser(new user(87654321, "Callan", "Password", true));
+model.addUser(new user(12345678, "Ashley", "Password", true));
+model.addUser(new user(95386481, "Admin", "Admin", true));
