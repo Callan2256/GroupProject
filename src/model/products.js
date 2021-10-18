@@ -1,11 +1,13 @@
-//schema
-const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+//Model - operations
 
-const ProductsSchema = new Schema({
-    name:{type:String, require=true},
-    price:{type=Number, require=true},
-    description:{type:String, require=true},
-});
+const model = {
+  users: [],
+  items: [],
 
-module.exports = mongoose.model('Products', ProductsSchema)
+  addUser(user) {
+    this.users.push(user);
+  },
+  addItem(item) {
+    this.items.push(item);
+  },
+};
