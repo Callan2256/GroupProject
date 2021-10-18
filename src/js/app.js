@@ -25,6 +25,10 @@ mongoose
         console.log(err);
     });
 
+//Temporary array
+let users = [];
+
+
 //ROUTES
 
 //Route to Homepage
@@ -69,6 +73,8 @@ app.post('/create', async(req, res) => {
 
     console.log("Username: " + username);
     console.log("Password: " + pass);
+
+    users.push(user);
 
     res.status(201).send();
 });
