@@ -8,6 +8,9 @@ const app = express();
 const PORT = 3000;
 const path = require("path");
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 //connect to database
 mongoose
     .connect(process.env.DB_CONNECTION)
@@ -37,6 +40,13 @@ app.get("/model/products.js", (req, res) => {
 
 app.get("/controller/controller.js", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
+});
+
+app.post('/create', (req, res) => {
+    console.log("Test");
+    console.log(req.body.username);
+    console.log(req.body.password);
+    res.status(201).send();
 });
 
 //starting server

@@ -1,13 +1,11 @@
-GET http://localhost:3000/controller/controller.js
+GET http://localhost:3000/
 
 ###
 
-POST http://localhost:3000/users
+POST http://localhost:3000/create
 Content-Type: application/json 
 
 {
-    "id": "5729389"
-    "password": "password"
-    "name": "Test"
-    "admin": "false"
+    "username": "Callan",
+    "password": "Password"
 }
