@@ -47,7 +47,7 @@ app.get("/controller/controller.js", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
 });
 
-//addproduct form
+//addproduct
 app.get("/addproduct", (req, res) => {
   res.sendFile(
     path.join(__dirname, "..", "view", "html", "addProductForm.html")
