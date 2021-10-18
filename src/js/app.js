@@ -17,121 +17,143 @@ app.use(express.json());
 
 //connect to database
 mongoose
-    .connect(process.env.DB_CONNECTION)
-    .then(() => {
-        console.log("MongoDB connected");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .connect(process.env.DB_CONNECTION)
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //Temporary array
 let users = [];
-
 
 //ROUTES
 
 //Route to Homepage
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "view", "html", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "view", "html", "index.html"));
 });
 
 //Static path for CSS
 app.use(express.static(path.join(__dirname, "..", "/public")));
 
 app.get("/model/user.js", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "model", "user.js"));
+  res.sendFile(path.join(__dirname, "..", "model", "user.js"));
 });
 
 app.get("/model/products.js", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "model", "products.js"));
+  res.sendFile(path.join(__dirname, "..", "model", "products.js"));
 });
 
 app.get("/controller/controller.js", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
+  res.sendFile(path.join(__dirname, "..", "controller", "controller.js"));
 });
 
-app.get('/users', (req, res) => {
-    res.send(users);
-})
-
-app.post('/create', async(req, res) => {
-    let pass = await encryptPass(req.body.password);
-    let username = req.body.username;
-    let id = req.body.id;
-
-    //create product
-    const productRoutes = require("../../routes/api/productsRoute");
-    app.use("/api/products", productRoutes);
-
-    let user = {
-        "id": id,
-        "username": username,
-        "password": pass,
-        "admin": "false"
-    }
-
-    console.log("Username: " + username);
-    console.log("Password: " + pass);
-
-    users.push(user);
-
-    res.status(201).send();
+app.get("/users", (req, res) => {
+  res.send(users);
 });
 
-app.post('/login', async(req, res) => {
-    let inputname = req.body.username;
-    let password = req.body.password;
+//addproduct form
+app.get("/addproduct", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "view", "html", "addProductForm.html")
+  );
+});
 
-    console.log(users);
-    let user = users.find(user => user.username === inputname);
+//create product
+const productRoutes = require("../../routes/api/productsRoute");
+app.use("/api/products", productRoutes);
 
-    if (user === undefined) {
-        res.status(400).send(JSON.stringify({
-            "Result": "Unsuccessful"
-        }));
-        return;
-    }
+app.post("/create", async (req, res) => {
+  let pass = await encryptPass(req.body.password);
+  let username = req.body.username;
+  let id = req.body.id;
 
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-        res.status(200).send(JSON.stringify({
-            "Result": "Success",
-            "id": user.id,
-            "username": user.username,
-            "admin": user.admin
-        }));
-        return;
-    } else {
-        res.status(400).send(JSON.stringify({
-            "Result": "Unsuccessful"
-        }));
-    }
+  let user = {
+    id: id,
+    username: username,
+    password: pass,
+    admin: "false",
+  };
+
+  console.log("Username: " + username);
+  console.log("Password: " + pass);
+
+  users.push(user);
+
+  res.status(201).send();
+});
+
+app.post("/login", async (req, res) => {
+  let inputname = req.body.username;
+  let password = req.body.password;
+
+  console.log(users);
+  let user = users.find((user) => user.username === inputname);
+
+  if (user === undefined) {
+    res.status(400).send(
+      JSON.stringify({
+        Result: "Unsuccessful",
+      })
+    );
+    return;
+  }
+
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    res.status(200).send(
+      JSON.stringify({
+        Result: "Success",
+        id: user.id,
+        username: user.username,
+        admin: user.admin,
+      })
+    );
+    return;
+  } else {
+    res.status(400).send(
+      JSON.stringify({
+        Result: "Unsuccessful",
+      })
+    );
+  }
 });
 
 //General Functions
 
 async function encryptPass(password) {
-    let salt = "";
-    let hash = "";
+  let salt = "";
+  let hash = "";
 
-    try {
-        salt = await bcrypt.genSalt(saltRounds);
-        hash = await bcrypt.hash(password, salt);
-    } catch {
-        console.log("Error Encrypting Pass");
-    }
+  try {
+    salt = await bcrypt.genSalt(saltRounds);
+    hash = await bcrypt.hash(password, salt);
+  } catch {
+    console.log("Error Encrypting Pass");
+  }
 
-    return hash;
+  return hash;
 }
 
 async function adminUsers() {
-    try {
-        users.push({ "id": "12345678", "username": "Callan", "password": await encryptPass("Password"), "admin": "true" })
-        users.push({ "id": "87654321", "username": "Ashley", "password": await encryptPass("Password"), "admin": "true" })
-    } catch {
-        console.log("Error Adding Admin Users");
-    }
+  try {
+    users.push({
+      id: "12345678",
+      username: "Callan",
+      password: await encryptPass("Password"),
+      admin: "true",
+    });
+    users.push({
+      id: "87654321",
+      username: "Ashley",
+      password: await encryptPass("Password"),
+      admin: "true",
+    });
+  } catch {
+    console.log("Error Adding Admin Users");
+  }
 }
 
 //Adding Admin Users
