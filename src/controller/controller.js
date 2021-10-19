@@ -1,3 +1,5 @@
+window.addEventListener("load", getProducts);
+
 //Login / Logout
 const loginPanel = document.getElementById("loginContainer");
 const loginBtn = document.getElementById("loginBtn");
@@ -107,27 +109,6 @@ signupCancel.addEventListener("click", (event) => {
     hidePanel();
 });
 
-addProductSubmit.addEventListener("click", (event) => {
-    event.preventDefault();
-    let productName = addProductForm.productName.value;
-    let productPrice = addProductForm.price.value;
-    let productDesc = addProductForm.description.value;
-
-    //POST Request
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", '/api/products', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        "productName": productName,
-        "productPrice": productPrice,
-        "productDesc": productDesc
-    }));
-
-    addProductForm.productName.value = "";
-    addProductForm.productPrice.value = "";
-    addProductForm.productDesc.value = "";
-})
-
 function login(username, password) {
     let inputName = username;
     let inputPass = password;
@@ -181,6 +162,29 @@ function displayLogin(user) {
     loginDiv.classList.add("hidden");
     accountDisplay.classList.remove("hidden");
     nameSpan.innerText = user.name;
+}
+
+function getProducts() {
+    console.log("test");
+
+    let xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.open("GET", "/api/products", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+
+    xhr.onload = () => {
+        if (xhr.readyState === 4) {
+
+            if (xhr.status == 200) {
+                let res = xhr.response;
+                console.log(res)
+                console.log("Fetched Products");
+            } else if (xhr.status == 400) {
+                console.log("Could Not Fetch Products");
+            }
+        }
+    }
 }
 
 /*

@@ -19,3 +19,19 @@ GET http://localhost:3000/users
 ###
 
 GET http://localhost:3000/viewProducts
+
+###
+
+GET http://localhost:3000/api/products
+
+## Heroku GET Requests ##
+
+GET http://coffee-co.herokuapp.com
+
+###
+
+GET http://coffee-co.herokuapp.com/api/products
+
+###
+
+GET http://coffee-co.herokuapp.com/api/users
