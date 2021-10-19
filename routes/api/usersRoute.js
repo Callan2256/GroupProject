@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
   console.log(newUser);
 
   try {
-    const user = await newUser.save(); //save new usere to the db
+    const user = await newUser.save(); //save new user to the db
     if (!user) {
       throw Error("Something went wrong while saving new user");
     }
