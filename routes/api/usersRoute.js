@@ -37,7 +37,7 @@ router.post("/", async(req, res) => {
         //id: req.body.id,
         name: req.body.username,
         password: await encryptPass(req.body.password),
-        isAdmin: true,
+        isAdmin: false,
     });
     console.log(newUser);
 
