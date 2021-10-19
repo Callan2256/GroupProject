@@ -1,4 +1,3 @@
-console.log("userRoute");
 const { response } = require("express");
 const express = require("express");
 const router = express.Router();
@@ -6,18 +5,23 @@ const router = express.Router();
 //user Model
 const Users = require("../../src/model/UserSchema");
 
+//bcrypt
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 //Create account
 router.post("/", async (req, res) => {
   console.log("req.body: " + req.body);
+  console.log("req.body.username: " + req.body.username);
+  console.log("req.body.password: " + req.body.password);
   const newUser = new Users({
-    // id: req.body.id,
-    username: req.body.username,
-    password: req.body.password,
-    admin: "false",
+    //id: req.body.id,
+    name: req.body.username,
+    password: await encryptPass(req.body.password),
+    isAdmin: false,
   });
   console.log(newUser);
-  console.log("Username: " + username);
-  console.log("Password: " + pass);
+
   try {
     const user = await newUser.save(); //save new usere to the db
     if (!user) {
