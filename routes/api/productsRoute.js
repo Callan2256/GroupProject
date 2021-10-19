@@ -5,6 +5,20 @@ const router = express.Router();
 //product Model
 const Products = require("../../src/model/ProductSchema");
 
+//@routes GET api/products
+//@desc get a product
+router.get("/", async (req, res) => {
+  try {
+    const product = await Products.find();
+    if (!product) {
+      throw Error("No itmes");
+    }
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(400).send({ msg: err });
+  }
+});
+
 //@routes POST api/products
 //@desc Create a product
 router.post("/", async (req, res) => {
