@@ -127,26 +127,4 @@ async function encryptPass(password) {
   return hash;
 }
 
-// async function adminUsers() {
-//   try {
-//     users.push({
-//       id: "12345678",
-//       username: "Callan",
-//       password: await encryptPass("Password"),
-//       admin: "true",
-//     });
-//     users.push({
-//       id: "87654321",
-//       username: "Ashley",
-//       password: await encryptPass("Password"),
-//       admin: "true",
-//     });
-//   } catch {
-//     console.log("Error Adding Admin Users");
-//   }
-// }
-
-// //Adding Admin Users
-// adminUsers();
-
 module.exports = router;
