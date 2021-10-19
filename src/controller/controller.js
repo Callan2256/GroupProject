@@ -192,14 +192,16 @@ function getProducts() {
 
 function saveProducts(res) {
     console.log(res)
-    for (let i in res) {
-        console.log(i)
+    for (let i = 0; i < res.length; i++) {
+        let obj = res[i];
+
         let product = {
-            "name": i.name,
-            "price": i.price,
-            "description": i.description
+            "name": obj.name,
+            "price": obj.price,
+            "description": obj.description
         }
 
+        console.log(product)
         model.items.push(product);
     }
 }
