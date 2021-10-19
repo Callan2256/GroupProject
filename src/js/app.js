@@ -168,4 +168,4 @@ app.use("/api/users", userRoutes);
 // adminUsers();
 
 //starting server
-app.listen(process.env.PORT || 3000, console.log(`listening on port ${PORT}`));
+app.listen(process.env.PORT || PORT, console.log(`listening on port ${PORT}`));
