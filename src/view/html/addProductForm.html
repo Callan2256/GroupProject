@@ -1,20 +1,23 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Add Product Data</title>
 </head>
+
 <body>
     <h1>Add products using the form below:</h1>
-    <form method="POST" action="/api/products">
-        <label>Name:<input type="text" name="product-name" required></label>
+    <form id="productForm" method="POST" action="/api/products">
+        <label>Name:<input type="text" name="productName" required></label>
         <br>
         <label>Price:<input type="number" name="price" required></label>
         <br>
         <label>Description:<br><textarea name="description"></textarea></label>
         <br>
-        <input type="submit" value="Submit">
+        <input id="addProductSubmit" type="submit" value="Submit">
     </form>
-    <a href="/view-products">View products</a>
+    <a href="/viewProducts">View products</a>
 </body>
+
 </html>

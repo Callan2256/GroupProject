@@ -17,6 +17,10 @@ const signupHeader = document.getElementById("signupHeader");
 //Model
 const modelInst = model;
 
+//Add Product
+let productForm = document.getElementById("productForm");
+let addProductSubmit = document.getElementById("addProductSubmit");
+
 //Encryption
 
 /*
@@ -102,6 +106,27 @@ signupCancel.addEventListener("click", (event) => {
     event.preventDefault();
     hidePanel();
 });
+
+addProductSubmit.addEventListener("click", (event) => {
+    event.preventDefault();
+    let productName = addProductForm.productName.value;
+    let productPrice = addProductForm.price.value;
+    let productDesc = addProductForm.description.value;
+
+    //POST Request
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/api/products', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        "productName": productName,
+        "productPrice": productPrice,
+        "productDesc": productDesc
+    }));
+
+    addProductForm.productName.value = "";
+    addProductForm.productPrice.value = "";
+    addProductForm.productDesc.value = "";
+})
 
 function login(username, password) {
     let inputName = username;
