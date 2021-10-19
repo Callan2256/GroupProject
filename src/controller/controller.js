@@ -191,9 +191,7 @@ function getProducts() {
 
 
 function saveProducts(res) {
-    let obj = JSON.parse(res);
-
-    for (let i in obj) {
+    for (let i in res) {
         let product = {
             "name": i.name,
             "price": i.price,
