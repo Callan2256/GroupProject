@@ -2,10 +2,10 @@
     "name": "groupproject",
     "version": "1.0.0",
     "description": "NWEN304 Group Project",
-    "main": "/src/js/app.js",
+    "main": "src/js/app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon /src/js/app.js"
+        "start": "node src/js/app.js"
     },
     "repository": {
         "type": "git",
