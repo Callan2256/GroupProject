@@ -73,26 +73,6 @@ app.get("/api/products", productRoutes);
 const userRoutes = require("../../routes/api/usersRoute");
 app.use("/api/users", userRoutes);
 
-// app.post("/createAccount", async (req, res) => {
-//   let pass = await encryptPass(req.body.password);
-//   let username = req.body.username;
-//   let id = req.body.id;
-
-//   let user = {
-//     id: id,
-//     username: username,
-//     password: pass,
-//     admin: "false",
-//   };
-
-//   console.log("Username: " + username);
-//   console.log("Password: " + pass);
-
-//   users.push(user);
-
-//   res.status(201).send();
-// });
-
 // app.post("/login", async (req, res) => {
 //   let inputname = req.body.username;
 //   let password = req.body.password;

@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
     //id: req.body.id,
     name: req.body.username,
     password: await encryptPass(req.body.password),
-    isAdmin: false,
+    isAdmin: true,
   });
   console.log(newUser);
 
@@ -53,42 +53,63 @@ router.post("/", async (req, res) => {
 });
 
 //login
-// router.post("/login", async (req, res) => {
-//   let inputname = req.body.username;
-//   let password = req.body.password;
+router.post("/login", async (req, res) => {
+  console.log("login");
+  console.log("req.body: " + req.body);
 
-//   console.log(users);
-//   let user = users.find((user) => user.username === inputname);
+  try {
+    const user = await Users.findOne({
+      name: req.body.username,
+    });
+    if (!user) {
+      throw Error("user not found");
+    }
+    res.status(200).json(user);
+    const match = await bcrypt.compare(req.body.password, user.password);
+    if (match) {
+      res.status(200).send(
+        JSON.stringify({
+          Result: "Success",
+          // id: user.id,
+          username: user.username,
+          admin: user.admin,
+        })
+      );
 
-//   if (user === undefined) {
-//     res.status(400).send(
-//       JSON.stringify({
-//         Result: "Unsuccessful",
-//       })
-//     );
-//     return;
-//   }
+      return;
+    } else {
+      res.status(400).send(
+        JSON.stringify({
+          Result: "Unsuccessful",
+        })
+      );
+    }
 
-//compare passwords when logging in
-//   const match = await bcrypt.compare(password, user.password);
-//   if (match) {
-//     res.status(200).send(
-//       JSON.stringify({
-//         Result: "Success",
-//         id: user.id,
-//         username: user.username,
-//         admin: user.admin,
-//       })
-//     );
-//     return;
-//   } else {
-//     res.status(400).send(
-//       JSON.stringify({
-//         Result: "Unsuccessful",
-//       })
-//     );
-//   }
-// });
+    console.log(user);
+  } catch (err) {
+    res.status(400).send({ msg: err });
+  }
+
+  //compare passwords when logging in
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    res.status(200).send(
+      JSON.stringify({
+        Result: "Success",
+        id: user.id,
+        username: user.username,
+        admin: user.admin,
+      })
+    );
+    return;
+  } else {
+    res.status(400).send(
+      JSON.stringify({
+        Result: "Unsuccessful",
+      })
+    );
+  }
+});
 
 //General Functions
 
