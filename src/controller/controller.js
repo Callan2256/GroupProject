@@ -84,7 +84,7 @@ signupSubmit.addEventListener("click", (event) => {
 
         //POST Request
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", '/create', true);
+        xhr.open("POST", '/api/users', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify({
             "id": id,
