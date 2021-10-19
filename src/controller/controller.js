@@ -210,7 +210,6 @@ function saveProducts(res) {
 }
 
 function loadProducts() {
-    console.log("test")
     let container = document.getElementById('productContainer');
     container.innerHTML = "";
 
@@ -220,12 +219,19 @@ function loadProducts() {
         let newProductHTML = `
         <div class="flex-item">
             <div class="product panel">
-                <h5>Name</h5>
-                <p>${item.name}</p>
-                <h5>Price</h5>
-                <p>${item.price}</p>
-                <h5>Description:</h5>
-                <p>${item.description}</p>
+                <h3 class="productTitle">Product:</h3>
+                <div class="row">
+                    <h5 class="row-item">Name</h5>
+                    <p class="row-item">${item.name}</p>
+                </div>
+                <div class="row">
+                    <h5 class="row-item">Price</h5>
+                    <p class="row-item">${item.price}</p>
+                </div>
+                <div class="row">
+                    <h5 class="row-item">Description:</h5>
+                    <p class="row-item">${item.description}</p>
+                </div>
             </div>
         </div>
     `
