@@ -6,12 +6,12 @@ const router = express.Router();
 const Products = require("../../src/model/ProductSchema");
 
 //@routes GET api/products
-//@desc get a product
+//@desc get products
 router.get("/", async (req, res) => {
   try {
     const product = await Products.find();
     if (!product) {
-      throw Error("No itmes");
+      throw Error("No items");
     }
     res.status(200).json(product);
   } catch (err) {
