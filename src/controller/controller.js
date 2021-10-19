@@ -185,6 +185,18 @@ function getProducts() {
             }
         }
     }
+
+    let obj = JSON.parse(res);
+
+    for (let i in obj) {
+        let product = {
+            "name": i.name,
+            "price": i.price,
+            "description": i.description
+        }
+
+        model.items.push(product);
+    }
 }
 
 /*
