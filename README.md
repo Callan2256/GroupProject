@@ -5,15 +5,16 @@ Callan and Ashley's **NWEN304 Group Project**
 
 ## App Design
 
-This will be a basic marketplace app for coffee that the user can log into and add items into their cart.
+This will be a basic product app for coffee
 
 ## Features
-* Shop page
+* Product Page
 * User login
-  * Authenticated Login
   * Encrypted
-  * Facebook / Google Login
-* Admin Login
-  * Add new items
-  * Remove items
-  * Edit items
+  * Database based
+* User Creation
+  * Confirm Password
+  * Password requirements
+* Database
+  * Mongoose
+  * Accessible through RESTful service
