@@ -165,6 +165,7 @@ function displayLogin(user) {
 }
 
 function getProducts() {
+    model.items = [];
     console.log("test");
 
     let xhr = new XMLHttpRequest();
@@ -191,7 +192,7 @@ function getProducts() {
 
 
 function saveProducts(res) {
-    console.log(res)
+    //console.log(res)
     for (let i = 0; i < res.length; i++) {
         let obj = res[i];
 
@@ -201,9 +202,38 @@ function saveProducts(res) {
             "description": obj.description
         }
 
-        console.log(product)
+        //console.log(product)
         model.items.push(product);
     }
+
+    loadProducts();
+}
+
+function loadProducts() {
+    console.log("test")
+    let container = document.getElementById('productContainer');
+    container.innerHTML = "";
+
+    let newHTML = '';
+
+    model.items.forEach(item => {
+        let newProductHTML = `
+        <div class="flex-item">
+            <div class="product panel">
+                <h5>Name</h5>
+                <p>${item.name}</p>
+                <h5>Price</h5>
+                <p>${item.price}</p>
+                <h5>Description:</h5>
+                <p>${item.description}</p>
+            </div>
+        </div>
+    `
+
+        newHTML += newProductHTML;
+    });
+
+    container.innerHTML = newHTML;
 }
 /*
 Clearing the form fields for login / logout
