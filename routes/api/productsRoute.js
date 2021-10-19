@@ -9,7 +9,7 @@ const Products = require("../../src/model/ProductSchema");
 //@desc Create a product
 router.post("/", async (req, res) => {
   const newProduct = new Products(req.body);
-
+  console.log(req.body.name);
   try {
     const product = await newProduct.save(); //save new product to the db
     if (!product) {

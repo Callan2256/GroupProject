@@ -61,103 +61,107 @@ app.get("/addproduct", (req, res) => {
   );
 });
 
-//create product
+//create product in form
 const productRoutes = require("../../routes/api/productsRoute");
 app.use("/api/products", productRoutes);
 
-app.post("/create", async (req, res) => {
-  let pass = await encryptPass(req.body.password);
-  let username = req.body.username;
-  let id = req.body.id;
+//create account in form
+const userRoutes = require("../../routes/api/usersRoute");
+app.use("/api/users", userRoutes);
 
-  let user = {
-    id: id,
-    username: username,
-    password: pass,
-    admin: "false",
-  };
+// app.post("/createAccount", async (req, res) => {
+//   let pass = await encryptPass(req.body.password);
+//   let username = req.body.username;
+//   let id = req.body.id;
 
-  console.log("Username: " + username);
-  console.log("Password: " + pass);
+//   let user = {
+//     id: id,
+//     username: username,
+//     password: pass,
+//     admin: "false",
+//   };
 
-  users.push(user);
+//   console.log("Username: " + username);
+//   console.log("Password: " + pass);
 
-  res.status(201).send();
-});
+//   users.push(user);
 
-app.post("/login", async (req, res) => {
-  let inputname = req.body.username;
-  let password = req.body.password;
+//   res.status(201).send();
+// });
 
-  console.log(users);
-  let user = users.find((user) => user.username === inputname);
+// app.post("/login", async (req, res) => {
+//   let inputname = req.body.username;
+//   let password = req.body.password;
 
-  if (user === undefined) {
-    res.status(400).send(
-      JSON.stringify({
-        Result: "Unsuccessful",
-      })
-    );
-    return;
-  }
+//   console.log(users);
+//   let user = users.find((user) => user.username === inputname);
 
-  const match = await bcrypt.compare(password, user.password);
-  if (match) {
-    res.status(200).send(
-      JSON.stringify({
-        Result: "Success",
-        id: user.id,
-        username: user.username,
-        admin: user.admin,
-      })
-    );
-    return;
-  } else {
-    res.status(400).send(
-      JSON.stringify({
-        Result: "Unsuccessful",
-      })
-    );
-  }
-});
+//   if (user === undefined) {
+//     res.status(400).send(
+//       JSON.stringify({
+//         Result: "Unsuccessful",
+//       })
+//     );
+//     return;
+//   }
 
-//General Functions
+//   const match = await bcrypt.compare(password, user.password);
+//   if (match) {
+//     res.status(200).send(
+//       JSON.stringify({
+//         Result: "Success",
+//         id: user.id,
+//         username: user.username,
+//         admin: user.admin,
+//       })
+//     );
+//     return;
+//   } else {
+//     res.status(400).send(
+//       JSON.stringify({
+//         Result: "Unsuccessful",
+//       })
+//     );
+//   }
+// });
 
-async function encryptPass(password) {
-  let salt = "";
-  let hash = "";
+// //General Functions
 
-  try {
-    salt = await bcrypt.genSalt(saltRounds);
-    hash = await bcrypt.hash(password, salt);
-  } catch {
-    console.log("Error Encrypting Pass");
-  }
+// async function encryptPass(password) {
+//   let salt = "";
+//   let hash = "";
 
-  return hash;
-}
+//   try {
+//     salt = await bcrypt.genSalt(saltRounds);
+//     hash = await bcrypt.hash(password, salt);
+//   } catch {
+//     console.log("Error Encrypting Pass");
+//   }
 
-async function adminUsers() {
-  try {
-    users.push({
-      id: "12345678",
-      username: "Callan",
-      password: await encryptPass("Password"),
-      admin: "true",
-    });
-    users.push({
-      id: "87654321",
-      username: "Ashley",
-      password: await encryptPass("Password"),
-      admin: "true",
-    });
-  } catch {
-    console.log("Error Adding Admin Users");
-  }
-}
+//   return hash;
+// }
 
-//Adding Admin Users
-adminUsers();
+// async function adminUsers() {
+//   try {
+//     users.push({
+//       id: "12345678",
+//       username: "Callan",
+//       password: await encryptPass("Password"),
+//       admin: "true",
+//     });
+//     users.push({
+//       id: "87654321",
+//       username: "Ashley",
+//       password: await encryptPass("Password"),
+//       admin: "true",
+//     });
+//   } catch {
+//     console.log("Error Adding Admin Users");
+//   }
+// }
+
+// //Adding Admin Users
+// adminUsers();
 
 //starting server
 app.listen(3000, console.log(`listening on port ${PORT}`));
