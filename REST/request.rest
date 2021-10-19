@@ -1,3 +1,7 @@
+###########################
+### Local Host REQUESTS ###
+###########################
+
 GET http://localhost:3000/
 
 ###
@@ -15,7 +19,6 @@ Content-Type: application/json
 
 GET http://localhost:3000/users
 
-
 ###
 
 GET http://localhost:3000/viewProducts
@@ -24,7 +27,9 @@ GET http://localhost:3000/viewProducts
 
 GET http://localhost:3000/api/products
 
-## Heroku GET Requests ##
+###########################
+##### HEROKU REQUESTS #####
+###########################
 
 GET http://coffee-co.herokuapp.com
 
@@ -35,3 +40,35 @@ GET http://coffee-co.herokuapp.com/api/products
 ###
 
 GET http://coffee-co.herokuapp.com/api/users
+
+###
+
+POST http://coffee-co.herokuapp.com/api/products
+Content-Type: application/json 
+
+{
+    "name": "Test Product",
+    "price": "10",
+    "description": "This is a POST Request"
+}
+
+###
+
+POST http://coffee-co.herokuapp.com/api/users/login 
+Content-Type: application/json 
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+
+POST http://coffee-co.herokuapp.com/api/users/
+Content-Type: application/json 
+
+{
+    "username": "New User",
+    "password": "Password",
+    "isAdmin": false
+}
