@@ -11,6 +11,9 @@ const Users = require("../../src/model/UserSchema");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
+//
+let users = new Array();
+
 //@routes GET api/users
 //@desc get users
 router.get("/", async (req, res) => {
@@ -20,6 +23,7 @@ router.get("/", async (req, res) => {
       throw Error("No users");
     }
     res.status(200).json(user);
+    console.log(user);
   } catch (err) {
     res.status(400).send({ msg: err });
   }

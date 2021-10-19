@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
       throw Error("No items");
     }
     res.status(200).json(product);
+    console.log(product);
   } catch (err) {
     res.status(400).send({ msg: err });
   }
