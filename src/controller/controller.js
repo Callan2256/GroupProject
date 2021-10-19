@@ -192,6 +192,7 @@ function getProducts() {
 
 function saveProducts(res) {
     for (let i in res) {
+        console.log(i)
         let product = {
             "name": i.name,
             "price": i.price,
