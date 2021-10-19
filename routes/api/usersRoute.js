@@ -10,27 +10,26 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 //Create account
-router.post("/", async (req, res) => {
-  console.log("req.body: " + req.body);
-  console.log("req.body.username: " + req.body.username);
-  console.log("req.body.password: " + req.body.password);
-  const newUser = new Users({
-    //id: req.body.id,
-    name: req.body.username,
-    password: await encryptPass(req.body.password),
-    isAdmin: false,
-  });
-  console.log(newUser);
+router.post("/", async(req, res) => {
+    console.log("req.body: " + JSON.stringify(req.body));
 
-  try {
-    const user = await newUser.save(); //save new usere to the db
-    if (!user) {
-      throw Error("Something went wrong while saving new product");
+    const newUser = new Users({
+        //id: req.body.id,
+        name: req.body.username,
+        password: await encryptPass(req.body.password),
+        isAdmin: false,
+    });
+    console.log(newUser);
+
+    try {
+        const user = await newUser.save(); //save new usere to the db
+        if (!user) {
+            throw Error("Something went wrong while saving new user");
+        }
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).send({ msg: err });
     }
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(400).send({ msg: err });
-  }
 });
 
 //login
@@ -74,17 +73,17 @@ router.post("/", async (req, res) => {
 //General Functions
 
 async function encryptPass(password) {
-  let salt = "";
-  let hash = "";
+    let salt = "";
+    let hash = "";
 
-  try {
-    salt = await bcrypt.genSalt(saltRounds);
-    hash = await bcrypt.hash(password, salt);
-  } catch {
-    console.log("Error Encrypting Pass");
-  }
+    try {
+        salt = await bcrypt.genSalt(saltRounds);
+        hash = await bcrypt.hash(password, salt);
+    } catch {
+        console.log("Error Encrypting Pass");
+    }
 
-  return hash;
+    return hash;
 }
 
 // async function adminUsers() {
