@@ -31,15 +31,12 @@ router.get("/", async (req, res) => {
 
 //Create account
 router.post("/", async (req, res) => {
-  console.log("req.body: " + JSON.stringify(req.body));
-
   const newUser = new Users({
     //id: req.body.id,
     name: req.body.username,
     password: await encryptPass(req.body.password),
     isAdmin: false,
   });
-  console.log(newUser);
 
   try {
     const user = await newUser.save(); //save new user to the db
@@ -83,8 +80,6 @@ router.post("/login", async (req, res) => {
         })
       );
     }
-
-    //console.log(user);
   } catch (err) {
     console.log(err);
   }
