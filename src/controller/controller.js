@@ -1,3 +1,5 @@
+window.addEventListener("load", getProducts);
+
 //Login / Logout
 const loginPanel = document.getElementById("loginContainer");
 const loginBtn = document.getElementById("loginBtn");
@@ -188,6 +190,80 @@ function displayLogin(user) {
   nameSpan.innerText = user.name;
 }
 
+function getProducts() {
+  model.items = [];
+  console.log("test");
+
+  let xhr = new XMLHttpRequest();
+  xhr.responseType = "json";
+  xhr.open("GET", "/api/products", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send();
+
+  xhr.onload = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status == 200) {
+        let res = xhr.response;
+        //console.log(res)
+        console.log("Fetched Products");
+        saveProducts(res);
+      } else if (xhr.status == 400) {
+        console.log("Could Not Fetch Products");
+      }
+    }
+  };
+}
+
+function saveProducts(res) {
+  //console.log(res)
+  for (let i = 0; i < res.length; i++) {
+    let obj = res[i];
+
+    let product = {
+      name: obj.name,
+      price: obj.price,
+      description: obj.description,
+    };
+
+    //console.log(product)
+    model.items.push(product);
+  }
+
+  loadProducts();
+}
+
+function loadProducts() {
+  let container = document.getElementById("productContainer");
+  container.innerHTML = "";
+
+  let newHTML = "";
+
+  model.items.forEach((item) => {
+    let newProductHTML = `
+        <div class="flex-item">
+            <div class="product panel">
+                <h3 class="productTitle">Product:</h3>
+                <div class="row">
+                    <h5 class="row-item">Name</h5>
+                    <p class="row-item">${item.name}</p>
+                </div>
+                <div class="row">
+                    <h5 class="row-item">Price</h5>
+                    <p class="row-item">${item.price}</p>
+                </div>
+                <div class="row">
+                    <h5 class="row-item">Description:</h5>
+                    <p class="row-item">${item.description}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    newHTML += newProductHTML;
+  });
+
+  container.innerHTML = newHTML;
+}
 /*
 Clearing the form fields for login / logout
 */
