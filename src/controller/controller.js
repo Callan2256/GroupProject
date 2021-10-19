@@ -178,8 +178,10 @@ function getProducts() {
 
             if (xhr.status == 200) {
                 let res = xhr.response;
-                console.log(res)
+                //console.log(res)
                 console.log("Fetched Products");
+                saveProducts(res);
+
             } else if (xhr.status == 400) {
                 console.log("Could Not Fetch Products");
             }
@@ -187,6 +189,22 @@ function getProducts() {
     }
 }
 
+
+function saveProducts(res) {
+    console.log(res)
+    for (let i = 0; i < res.length; i++) {
+        let obj = res[i];
+
+        let product = {
+            "name": obj.name,
+            "price": obj.price,
+            "description": obj.description
+        }
+
+        console.log(product)
+        model.items.push(product);
+    }
+}
 /*
 Clearing the form fields for login / logout
 */
