@@ -191,6 +191,7 @@ function getProducts() {
 
 
 function saveProducts(res) {
+    console.log(res)
     for (let i in res) {
         console.log(i)
         let product = {
