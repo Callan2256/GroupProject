@@ -8,7 +8,7 @@ Callan and Ashley's **NWEN304 Group Project**
 This will be a basic product app for coffee
 
 ## Features
-* Product Page
+* Product page
 * User login
   * Encrypted
   * Database based
