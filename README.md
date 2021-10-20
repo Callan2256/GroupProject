@@ -19,5 +19,5 @@ This will be a basic product app for coffee
   * Mongoose
   * Accessible through RESTful service
 
-http://coffee-co.herokuapp.com
-http://coffee-co.herokuapp.com/addproduct
+* http://coffee-co.herokuapp.com
+* http://coffee-co.herokuapp.com/addproduct
